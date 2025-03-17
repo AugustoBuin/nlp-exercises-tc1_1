@@ -55,10 +55,20 @@ def plot_word_frequency(most_common_words):
     plt.show()
 
 
+def analyze_text(text):
+    """Counts unique words and calculates text diversity."""
+    words = text.split()
+    total_words = len(words)
+    unique_words = len(set(words))
+    diversity = unique_words / total_words * 100  # Percentage of unique words
+    return total_words, unique_words, diversity
+
+
 # Executes Functions
 raw_text = extract_text_from_pdf(pdf_path)
 cleaned_text = clean_text(raw_text)
 most_common_words = get_most_common_words(cleaned_text, 25)
+total_words, unique_words, diversity = analyze_text(cleaned_text)
 
 # Show Results
 print("As 25 palavras mais comuns no texto são:")
@@ -67,3 +77,8 @@ for word, freq in most_common_words:
 
 # Generates Graphs
 plot_word_frequency(most_common_words)
+
+# Displays Text Analysis
+print(f"Total de palavras: {total_words}")
+print(f"Palavras únicas: {unique_words}")
+print(f"Diversidade lexical: {diversity:.2f}%")
